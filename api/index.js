@@ -3,7 +3,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const uri = "mongodb+srv://anujsingh0r:FuhrxRmsr4nWjpub@cluster6.mfwkoxk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster6";
+const uri = "mongodb+srv://vercel-admin-user:JSdjiSgjTzMS3cUy@cluster6.mfwkoxk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -22,7 +22,7 @@ async function run(obj) {
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
     const database = client.db('userData');
-    await database.collection('Login_data').insertOne(obj);
+    await database.collection('Login_cred').insertOne(obj);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
