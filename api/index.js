@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 // test db connection
 app.get('/anuj',(req,res)=>{
     run({"Username":"Anuj"});
-    res.send('data updated succesfully');
+    res.send('data updated anuj succesfully');
 })
 
 // Start the server
