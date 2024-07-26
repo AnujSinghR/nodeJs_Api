@@ -42,8 +42,8 @@ app.get('/', (req, res) => {
 
 // test db connection
 app.get('/anuj',(req,res)=>{
-    run({"Username":"Anuj"});
-    res.send('data updated anuj succesfully');
+    run({"Username":"Anuj","city":"dehradun"});
+    res.send(process.env.MONGODB_URI);
 })
 
 // Start the server
