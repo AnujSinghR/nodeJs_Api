@@ -1,37 +1,38 @@
 // mongo db crud operations
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+//const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const PORT = 3000;
 const uri = process.env.DBHOST;
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
 
-async function run(obj) {
+async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     console.log("Trying to connect with server");
-    await client.connect();
-    
+    await mongoose.connect(uri).then(()=>console.log("mongo db connected"));
     console.log("connected");
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    const database = client.db('test');
-    await database.collection('testData').insertOne(obj);
+    const userSchema = new mongoose.Schema({
+      firstName:{
+          type:String,
+          required:true
+      },
+      email:{
+          type:String,
+          required:true,
+      }
+  })
+  const user = mongoose.model("user",userSchema)
+  await user.create({
+      firstName:"vercel works",
+      email:"newuserbyvercel@gmail.com"
+  })
   }catch(error){
     console.log("Err",error); 
 
  } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
   }
 }
 
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
 
 // test db connection
 app.get('/anuj',(req,res)=>{
-    run({"Username":"Anuj","city":"sem"});
+    run();
     res.send(process.env.DBHOST);
 })
 
