@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const uri = process.env.DBHOST;
+const uri = process.env.MONGODB_URI;
 
 async function run() {
   try {
@@ -23,9 +23,9 @@ async function run() {
           required:true,
       }
   })
-  const user = mongoose.model("Login",userSchema)
+  const user = mongoose.model("Login_cred",userSchema)
   await user.create({
-      firstName:"vercel works",
+      firstName:"it finally works",
       email:"newuserbyvercel@gmail.com"
   })
   }catch(error){
@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 // test db connection
 app.get('/anuj',(req,res)=>{
     run();
-    res.send(process.env.DBHOST);
+    res.send(process.env.MONGODB_URI);
 })
 
 // Start the server
