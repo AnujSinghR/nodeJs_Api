@@ -23,7 +23,7 @@ async function run() {
           required:true,
       }
   })
-  const user = mongoose.model("user",userSchema)
+  const user = mongoose.model("Login",userSchema)
   await user.create({
       firstName:"vercel works",
       email:"newuserbyvercel@gmail.com"
