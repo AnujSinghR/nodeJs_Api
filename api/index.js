@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const uri = process.env.MONGODB_URI;
+const uri = process.env.DBHOST;
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -24,8 +24,8 @@ async function run(obj) {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    const database = client.db('userData');
-    await database.collection('Login_data').insertOne(obj);
+    const database = client.db('test');
+    await database.collection('testData').insertOne(obj);
   }catch(error){
     console.log("Err",error); 
 
@@ -42,8 +42,8 @@ app.get('/', (req, res) => {
 
 // test db connection
 app.get('/anuj',(req,res)=>{
-    run({"Username":"Anuj","city":"dehradun"});
-    res.send(process.env.MONGODB_URI);
+    run({"Username":"Anuj","city":"sem"});
+    res.send(process.env.DBHOST);
 })
 
 // Start the server
