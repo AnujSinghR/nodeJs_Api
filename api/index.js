@@ -40,8 +40,10 @@ app.get('/', (req, res) => {
 app.get('/anuj', async (req, res) => {
     try {
         await connectToDatabase();
-        const users = await User.find({});
-        res.json(users);
+        const newUser = new User({ firstName: "new user", email: "newuser@example.com" });
+        await newUser.save();
+        
+        res.send('User inserted successfully');
     } catch (error) {
         res.status(500).send("Error connecting to the database or fetching users");
     } finally {
