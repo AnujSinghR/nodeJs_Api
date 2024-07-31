@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const PORT = 8001;
-const cors = require('cors');
+//const cors = require('cors');
 const uri = process.env.MONGODB_URI||"mongodb+srv://vercel-admin-user:JSdjiSgjTzMS3cUy@cluster6.mfwkoxk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 app.use(express.json());
 
-app.use(cors());
+//app.use(cors());
 
 const userSchema = new mongoose.Schema({
     firstName: {
